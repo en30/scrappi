@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "Scrappi",
+  "description": "",
+  "version": "0.1.0",
+  "background": {
+    "persistend": false,
+    "scripts": ["background.js"]
+  },
+  "permissions": ["contextMenus", "tabs"],
+  "content_scripts": [
+    {
+      "matches": ["http://judge.u-aizu.ac.jp/onlinejudge/description*"],
+      "js": ["judge.u-aizu.ac.jp.js"]
+    }
+  ]
+}
