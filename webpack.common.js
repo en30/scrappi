@@ -30,7 +30,11 @@ module.exports = {
   devtool: "cheep-module-source-map",
   plugins: [
     new CopyWebpackPlugin({
-      patterns: [{ from: "manifest.json" }],
+      patterns: [
+        { from: "manifest.json" },
+        { from: "options.html" },
+        { from: "node_modules/bulma/css/bulma.min.css" },
+      ],
     }),
   ],
 };
