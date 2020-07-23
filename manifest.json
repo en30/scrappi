@@ -10,6 +10,11 @@
   "browser_action": {
     "default_title": "Scrappi!"
   },
-  "permissions": ["contextMenus", "tabs"],
-  "content_scripts": []
+  "permissions": ["contextMenus", "tabs", "https://scrapbox.io.*"],
+  "content_scripts": [
+    {
+      "matches": ["https://scrapbox.io/*"],
+      "js": ["scrapbox.io.js"]
+    }
+  ]
 }

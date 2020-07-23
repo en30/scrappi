@@ -1,10 +1,17 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
+const fs = require("fs");
+
+const entry = fs.readdirSync("src/entry").reduce(
+  (a, e) => ({
+    ...a,
+    [path.basename(e, ".ts")]: path.resolve(__dirname, "src", "entry", e),
+  }),
+  {}
+);
 
 module.exports = {
-  entry: {
-    background: "./src/background.ts",
-  },
+  entry,
   module: {
     rules: [
       {
