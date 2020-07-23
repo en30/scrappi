@@ -14,7 +14,7 @@
     "page": "options.html",
     "open_in_tab": false
   },
-  "permissions": ["storage", "contextMenus", "tabs", "https://scrapbox.io.*"],
+  "permissions": ["storage", "contextMenus", "tabs", "https://scrapbox.io/*"],
   "content_scripts": [
     {
       "matches": ["https://scrapbox.io/*"],

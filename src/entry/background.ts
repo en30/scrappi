@@ -1,4 +1,6 @@
 import { ScrapboxMessage } from "../messages";
+import { render } from "../template";
+import * as options from "../options";
 
 const waitList = new Set<number>();
 const u = (strings: TemplateStringsArray, ...exps: Array<string>) =>
@@ -20,18 +22,20 @@ chrome.runtime.onMessage.addListener((message: ScrapboxMessage, sender) => {
 
 chrome.browserAction.onClicked.addListener((tab) => {
   const addedOn = new Date().toISOString().replace(/T.*$/, "");
-  const body = `[${tab.title} ${tab.url}]
 
-Added on [${addedOn}]
-#Scrappi!`;
-
-  chrome.storage.sync.get(["project"], ({ project }) => {
+  chrome.storage.sync.get(options.keys, ({ project, template }) => {
     if (typeof project !== "string" || project.length === 0) {
       if (confirm("Please set Scrapbox Project")) {
         chrome.runtime.openOptionsPage();
       }
       return;
     }
+
+    const body = render(template, {
+      title: tab.title,
+      url: tab.url,
+      addedOn,
+    });
 
     chrome.tabs.create(
       {

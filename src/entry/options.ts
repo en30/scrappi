@@ -1,7 +1,20 @@
-chrome.storage.sync.get((items) => {
-  Object.keys(items).forEach((key) => {
-    const el = document.querySelector<HTMLInputElement>(`[name="${key}"]`);
-    if (el) el.value = items[key];
+import { defaultTemplate } from "../template";
+import { keys } from "../options";
+
+const defaults: Record<typeof keys[number], unknown> = {
+  project: "",
+  template: defaultTemplate,
+};
+
+const element = (key: typeof keys[number]) =>
+  document.querySelector<HTMLInputElement | HTMLTextAreaElement>(
+    `[name="${key}"]`
+  );
+
+chrome.storage.sync.get(keys, (items) => {
+  keys.forEach((key) => {
+    const el = element(key);
+    if (el) el.value = items[key] || defaults[key];
   });
 });
 
@@ -10,8 +23,11 @@ document.getElementById("cancel").addEventListener("click", () => {
 });
 
 document.getElementById("form").addEventListener("submit", () => {
-  const options = Array.from(document.querySelectorAll("input")).reduce(
-    (a, e) => ({ ...a, [e.name]: e.value }),
+  const options = keys.reduce(
+    (a, e) => ({
+      ...a,
+      [e]: element(e)?.value,
+    }),
     {}
   );
 
