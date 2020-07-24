@@ -4,6 +4,7 @@ import { keys, Options, OptionKey, save, load } from "../options";
 const defaults: Options = {
   project: "",
   template: defaultTemplate,
+  timeFormat: "'['yyyy'-'LL']-'dd",
 };
 
 const element = (key: OptionKey) =>

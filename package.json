@@ -22,6 +22,7 @@
   "homepage": "https://github.com/en30/scrappi#readme",
   "devDependencies": {
     "@types/chrome": "^0.0.121",
+    "@types/luxon": "^1.24.3",
     "@types/mustache": "^4.0.1",
     "@typescript-eslint/eslint-plugin": "^3.7.0",
     "@typescript-eslint/parser": "^3.7.0",
@@ -39,6 +40,7 @@
   },
   "dependencies": {
     "bulma": "^0.9.0",
+    "luxon": "^1.24.1",
     "mustache": "^4.0.1"
   },
   "husky": {

@@ -3,7 +3,7 @@ Mustache.escape = (text) => text;
 
 export const defaultTemplate = `[{{title}} {{url}}]
 
-Added on [{{addedOn}}]
+Added on {{addedAt}}
 #Scrappi!`;
 
 export const render = (

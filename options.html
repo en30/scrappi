@@ -30,6 +30,38 @@
                 id="template"
               ></textarea>
             </div>
+            <div class="help">
+              This template is used for Scrapbox page content. Template language
+              is <a href="https://github.com/janl/mustache.js"> mustache.js</a>.
+              Defined variables are below.
+              <div class="content">
+                <ul>
+                  <li><code>title</code></li>
+                  <li><code>url</code></li>
+                  <li><code>addedAt</code></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="timeFormat" class="label">Time format</label>
+            <div class="contol">
+              <input
+                class="input"
+                type="text"
+                id="timeFormat"
+                name="timeFormat"
+              />
+            </div>
+            <p class="help">
+              Format for <code>addedAt</code>. Based on
+              <a
+                href="https://moment.github.io/luxon/docs/manual/formatting.html#table-of-tokens"
+              >
+                Luxon's format</a
+              >.
+            </p>
           </div>
 
           <div class="field is-grouped is-grouped-right">

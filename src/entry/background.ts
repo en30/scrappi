@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import { ScrapboxMessage } from "../messages";
 import { render } from "../template";
 import { Options } from "../options";
@@ -14,13 +15,12 @@ const scrapboxUrl = (project: string, title: string, body: string) =>
 
 const createScrapboxPage = (
   tab: chrome.tabs.Tab,
-  addedOn: string,
-  { project, template }: Options
+  { project, template, timeFormat }: Options
 ) => {
   const body = render(template, {
     title: tab.title,
     url: tab.url,
-    addedOn,
+    addedAt: DateTime.local().toFormat(timeFormat),
   });
 
   chrome.tabs.create(
@@ -49,8 +49,6 @@ chrome.runtime.onMessage.addListener((message: ScrapboxMessage, sender) => {
 });
 
 chrome.browserAction.onClicked.addListener(async (tab) => {
-  const addedOn = new Date().toISOString().replace(/T.*$/, "");
-
   const opts = await options.load();
   if (typeof opts.project !== "string" || opts.project.length === 0) {
     if (confirm("Please set Scrapbox Project")) {
@@ -58,5 +56,5 @@ chrome.browserAction.onClicked.addListener(async (tab) => {
     }
     return;
   }
-  createScrapboxPage(tab, addedOn, opts);
+  createScrapboxPage(tab, opts);
 });
