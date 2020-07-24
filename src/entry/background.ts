@@ -48,7 +48,7 @@ chrome.runtime.onMessage.addListener((message: ScrapboxMessage, sender) => {
   }
 });
 
-chrome.browserAction.onClicked.addListener(async (tab) => {
+chrome.browserAction.onClicked.addListener(async () => {
   const opts = await options.load();
   if (typeof opts.project !== "string" || opts.project.length === 0) {
     if (confirm("Please set Scrapbox Project")) {
@@ -56,5 +56,22 @@ chrome.browserAction.onClicked.addListener(async (tab) => {
     }
     return;
   }
-  createScrapboxPage(tab, opts);
+
+  const exps = opts.ignorePatterns
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0)
+    .map((pattern) => new RegExp(pattern))
+    .concat([
+      new RegExp(`^https://scrapbox.io/${encodeURIComponent(opts.project)}/`),
+    ]);
+  const shouldIgnore = (url: string) => exps.some((exp) => exp.test(url));
+
+  chrome.tabs.query({ pinned: false, currentWindow: true }, (tabs) => {
+    tabs.forEach((tab) => {
+      if (shouldIgnore(tab.url)) return;
+
+      createScrapboxPage(tab, opts);
+    });
+  });
 });

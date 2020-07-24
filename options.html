@@ -64,6 +64,21 @@
             </p>
           </div>
 
+          <div class="field">
+            <label class="label" for="ignorePatterns">Ignore Patterns</label>
+            <div class="control">
+              <textarea
+                class="textarea"
+                name="ignorePatterns"
+                id="ignorePatterns"
+              ></textarea>
+            </div>
+            <div class="help">
+              1 RegExp pattern per line. If tab's url matches any pattern,
+              Scrappi! ignores the tab.
+            </div>
+          </div>
+
           <div class="field is-grouped is-grouped-right">
             <div class="control">
               <button id="cancel" class="button is-light" type="button">

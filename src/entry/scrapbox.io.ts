@@ -15,7 +15,7 @@ window.addEventListener("load", () => {
   const observer = new MutationObserver(
     debounce(() => {
       chrome.runtime.sendMessage(load());
-    }, 400)
+    }, 600)
   );
 
   observer.observe(window.document, {

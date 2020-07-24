@@ -1,11 +1,11 @@
-import { defaultTemplate } from "../template";
-import { keys, Options, OptionKey, save, load } from "../options";
-
-const defaults: Options = {
-  project: "",
-  template: defaultTemplate,
-  timeFormat: "'['yyyy'-'LL']-'dd",
-};
+import {
+  keys,
+  Options,
+  OptionKey,
+  save,
+  load,
+  defaultValues,
+} from "../options";
 
 const element = (key: OptionKey) =>
   document.querySelector<HTMLInputElement | HTMLTextAreaElement>(
@@ -15,7 +15,7 @@ const element = (key: OptionKey) =>
 load().then((items) => {
   keys.forEach((key) => {
     const el = element(key);
-    if (el) el.value = items[key] || defaults[key];
+    if (el) el.value = items[key] || defaultValues[key];
   });
 });
 
