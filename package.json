@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "bulma": "^0.9.0",
-    "luxon": "^1.24.1",
+    "luxon": "^2.5.2",
     "mustache": "^4.0.1"
   },
   "husky": {
